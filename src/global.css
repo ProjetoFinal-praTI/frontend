@@ -1,23 +1,11 @@
 @import "tailwindcss";
 
-:root {
-	--color-background: #080e20;
-	--color-surface: #3a506b;
-
-	--color-primary: #ef233c;
-	--color-primary-variant: #d11026;
-
-	--color-secondary: #ceec97;
-
-	--color-text: #ffffff;
-	--color-text-on-surface: #ffffff;
-	--color-accent: #bebebe;
-
-	font-family: Arial, Helvetica, sans-serif;
+@theme {
+  --color-primary: #1cca5b;
+  --color-secondary: #3c83f6;
+  --color-purple: #7a3ff2;
 }
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+body {
+  font-family: "Montserrat", sans-serif;
 }
