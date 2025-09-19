@@ -1,7 +1,7 @@
 interface ButtonProps {
   label: string;
   onClick?: () => void;
-  variant?: "primary" | "secondary" | "outline" | "gradient";
+  variant?: "primary" | "secondary" | "outline" | "link" | "destructive";
   fontWeight?: "medium" | "semibold" | "bold";
   fontSize?: "base" | "sm" | "lg";
   className?: string;
@@ -22,12 +22,15 @@ export const Button = (props: ButtonProps) => {
   } = props;
 
   const variants = {
-    primary: "bg-primary text-white hover:opacity-80 disabled:bg-gray-500",
-    secondary: "bg-secondary text-white hover:opacity-80 disabled:bg-gray-500",
+    primary:
+      "bg-primary text-primary-foreground hover:bg-primary/90 disabled:bg-gray-500",
+    secondary:
+      "bg-background text-foreground hover:bg-background/90 disabled:bg-gray-500",
     outline:
-      "border border-[#e3e8f4] hover:bg-purple hover:text-white hover:border-purple disabled:bg-gray-500 disabled:text-white",
-    gradient:
-      "bg-gradient-to-r from-primary to-secondary text-white disabled:from-bg-gray-500",
+      "border border-input hover:bg-accent hover:border-accent hover:text-accent-foreground",
+    link: "text-primary underline-offset-4 hover:underline",
+    destructive:
+      "bg-success/90 text-destructive-foreground hover:bg-success/80",
   };
 
   const fontWeights = {
@@ -44,7 +47,7 @@ export const Button = (props: ButtonProps) => {
 
   return (
     <button
-      className={`${variants[variant]} ${fontWeights[fontWeight]} ${fontSizes[fontSize]}  disabled:cursor-not-allowed flex px-5 py-2 items-center justify-center gap-2 rounded-full transition duration-300 ease-in-out cursor-pointer ${className}`}
+      className={`${variants[variant]} ${fontWeights[fontWeight]} ${fontSizes[fontSize]} disabled:cursor-not-allowed flex px-5 py-2 items-center justify-center gap-2 rounded-lg transition duration-300 ease-in-out cursor-pointer ${className}`}
       onClick={onClick}
       disabled={disabled}
     >
