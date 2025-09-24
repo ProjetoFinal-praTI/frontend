@@ -1,48 +1,47 @@
 @import "tailwindcss";
 
 @theme {
+  --color-background: hsl(222 35% 6%);
+  --color-foreground: hsl(210 40% 95%);
+  --color-surface: hsl(222 30% 8%);
 
-  --color-background: #0a0d15;
-  --color-foreground: #f0f6fc;
-  --color-surface: #0e1116;
+  --color-card: hsl(222 25% 10%);
+  --color-card-foreground: hsl(210 40% 95%);
+  --color-card-shadow: hsl(222 50% 3%);
 
-  --color-card: #10141a;
-  --color-card-foreground: #f0f6fc;
-  --color-card-shadow: #040608;
+  --color-primary: hsl(214 88% 52%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-primary-hover: hsl(214 88% 48%);
+  --color-primary-light: hsl(214 45% 20%);
 
-  --color-primary: #4a86e8;
-  --color-primary-foreground: #ffffff;
-  --color-primary-hover: #3c79d9;
-  --color-primary-light: #1a2b47;
+  --color-secondary: hsl(215 28% 70%);
+  --color-secondary-foreground: hsl(222 35% 6%);
+  --color-secondary-hover: hsl(215 28% 75%);
+  --color-secondary-light: hsl(215 28% 25%);
 
-  --color-secondary: #a0aed4;
-  --color-secondary-foreground: #0a0d15;
-  --color-secondary-hover: #b4bfdf;
-  --color-secondary-light: #2d3750;
+  --color-muted: hsl(222 20% 15%);
+  --color-muted-foreground: hsl(220 10% 65%);
+  --color-muted-border: hsl(222 15% 25%);
 
-  --color-muted: #1f2429;
-  --color-muted-foreground: #9da3b0;
-  --color-muted-border: #363b40;
+  --color-success: hsl(142 76% 36%);
+  --color-success-foreground: hsl(222 35% 6%);
+  --color-success-light: hsl(142 30% 15%);
+  --color-destructive: hsl(0 72% 51%);
+  --color-destructive-foreground: hsl(210 40% 95%);
+  --color-destructive-light: hsl(0 30% 15%);
+  --color-warning: hsl(38 92% 50%);
+  --color-warning-foreground: hsl(222 35% 6%);
+  --color-warning-light: hsl(38 30% 15%);
 
-  --color-success: #1a932e;
-  --color-success-foreground: #0a0d15;
-  --color-success-light: #183d20;
-  --color-destructive: #d94545;
-  --color-destructive-foreground: #f0f6fc;
-  --color-destructive-light: #3d1818;
-  --color-warning: #f2a60c;
-  --color-warning-foreground: #0a0d15;
-  --color-warning-light: #3d2a0c;
+  --color-accent: hsl(214 88% 52%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-popover: hsl(222 25% 12%);
+  --color-popover-foreground: hsl(210 40% 95%);
 
-  --color-accent: #4a86e8;
-  --color-accent-foreground: #ffffff;
-  --color-popover: #151a21;
-  --color-popover-foreground: #f0f6fc;
-
-  --color-border: #363b40;
-  --color-input: #1f2429;
-  --color-input-border: #40454d;
-  --color-ring: #4a86e8;
+  --color-border: hsl(222 15% 25%);
+  --color-input: hsl(222 20% 15%);
+  --color-input-border: hsl(222 15% 30%);
+  --color-ring: hsl(214 88% 52%);
 }
 
 body {
