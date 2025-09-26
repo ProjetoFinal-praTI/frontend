@@ -1,3 +1,4 @@
+import { Button } from "@/components/Buttons/Button";
 import { CustomInput } from "@/components/CustomInput";
 import { useState } from "react";
 
@@ -11,7 +12,7 @@ export const LoginForm = () => {
         onChange={setValue}
         label="E-mail"
         inputType="email"
-        placeholder="seuemail@gmail.com"
+        placeholder="seu@email.com"
       />
       <CustomInput
         value={senha}
@@ -20,6 +21,8 @@ export const LoginForm = () => {
         inputType="password"
         placeholder="********"
       />
+      <a href="" className="text-sm text-primary hover:text-primary/80 self-end">Esqueceu sua senha?</a>
+      <Button label="Entrar" className="w-full" />
     </form>
   );
 };
