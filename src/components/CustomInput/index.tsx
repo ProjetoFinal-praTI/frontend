@@ -14,7 +14,7 @@ export const CustomInput: React.FC<CustomInputProps> = ({
   onChange,
 }) => {
   const baseStyles =
-    "w-full flex transition-colors duration-200 ease-in-out border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-600 focus:border-transparent";
+    "bg-background w-full flex border border-border rounded-xl focus:outline-none text-card-foreground";
 
   const sizeStyles = {
     sm: inputType === "textarea" ? "p-2 text-sm" : "h-10 px-2 py-1 text-sm",
@@ -27,8 +27,6 @@ export const CustomInput: React.FC<CustomInputProps> = ({
 
     if (disabled || readonly) {
       classes += " bg-gray-100 text-gray-500 cursor-not-allowed";
-    } else {
-      classes += " hover:border-blue-400";
     }
 
     return classes.trim();
@@ -45,10 +43,10 @@ export const CustomInput: React.FC<CustomInputProps> = ({
   const isTextarea = inputType === "textarea";
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-2">
       {label && (
         <label
-          className="text-sm font-semibold text-gray-700"
+          className="text-sm font-medium text-accent-foreground"
           data-testid="CustomInput-component-label"
         >
           {label}

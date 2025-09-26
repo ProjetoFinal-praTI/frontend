@@ -4,7 +4,7 @@ interface UserIconProps {
 }
 
 export const UserIcon = (props: UserIconProps) => {
-  const { className, stroke = "#000000" } = props;
+  const { className, stroke } = props;
   return (
     <svg
       width="24"
