@@ -4,7 +4,7 @@ import { UserIcon } from "../Icons/UserIcon";
 
 export const Menu = () => {
   return (
-    <menu className="rounded-b-sm shadow-sm py-6 px-14 bg-background">
+    <menu className="rounded-b-sm shadow-sm py-6 px-6 md:px-14 bg-background border-b border-border">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <MoneyIcon stroke="#fff" className="w-5 h-5" />
