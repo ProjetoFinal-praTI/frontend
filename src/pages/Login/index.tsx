@@ -1,4 +1,3 @@
-import { Button } from "@/components/Buttons/Button";
 import { LoginForm } from "@/components/Forms/LoginForm";
 import { Link } from "react-router-dom";
 
@@ -15,7 +14,7 @@ export const Login = () => {
           </p>
         </div>
         <LoginForm />
-        <p className="text- text-sm text-center">
+        <p className="text-foreground text-sm text-center">
           Não tem uma conta?{" "}
           <Link to={"/cadastro"} className="font-bold underline cursor-pointer">
             Cadastre-se

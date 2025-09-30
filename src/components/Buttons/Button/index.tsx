@@ -27,7 +27,7 @@ export const Button = (props: ButtonProps) => {
     secondary:
       "bg-background text-foreground hover:bg-background/90 disabled:bg-gray-500",
     outline:
-      "border border-input hover:bg-accent hover:border-accent hover:text-accent-foreground",
+      "border border-border text-foreground hover:bg-accent hover:border-accent hover:text-accent-foreground",
     link: "text-primary underline-offset-4 hover:underline",
     destructive:
       "bg-success/90 text-destructive-foreground hover:bg-success/80",

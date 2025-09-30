@@ -1,18 +1,20 @@
 import type { CSSProperties } from "react";
 
 export interface CustomInputProps {
-	value: string;
+  value: string;
 
-	label?: string;
-	placeholder?: string;
+  label?: string;
+  placeholder?: string;
 
-	disabled?: boolean;
-	readonly?: boolean;
-	required?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+  maxDate?: string;
 
-	size?: "sm" | "md" | "lg";
-	style?: CSSProperties;
+  size?: "sm" | "md" | "lg";
+  style?: CSSProperties;
+  register?: any;
 
-	inputType?: "text" | "password" | "textarea" | "email";
-	onChange?: (value: string) => void;
+  inputType?: "text" | "password" | "textarea" | "email" | "date" | "number";
+  onChange?: (value: string) => void;
 }

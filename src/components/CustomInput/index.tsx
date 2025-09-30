@@ -7,14 +7,16 @@ export const CustomInput: React.FC<CustomInputProps> = ({
   placeholder,
   required,
   disabled = false,
+  maxDate,
   readonly = false,
   size = "md",
   style,
   inputType = "text",
   onChange,
+  register,
 }) => {
   const baseStyles =
-    "bg-background w-full flex border border-border rounded-xl focus:outline-none text-card-foreground";
+    "bg-[#1f232e] w-full flex border border-border rounded-xl focus:outline-none text-card-foreground";
 
   const sizeStyles = {
     sm: inputType === "textarea" ? "p-2 text-sm" : "h-10 px-2 py-1 text-sm",
@@ -82,13 +84,10 @@ export const CustomInput: React.FC<CustomInputProps> = ({
           placeholder={placeholder}
           required={required}
           disabled={disabled}
+          max={maxDate}
           readOnly={readonly}
           onChange={handleChange}
           className={getCombinedClasses(baseStyles)}
-          style={{
-            ...style,
-            padding: "8px 12px",
-          }}
           data-testid="CustomInput-component-inputfield"
         />
       )}
