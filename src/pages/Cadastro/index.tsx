@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Cadastro = () => {
   return (
-    <div className="flex justify-center items-center bg-background h-screen">
+    <div className="flex justify-center items-center bg-background min-h-[85vh]">
       <div className="flex flex-col items-center p-6 gap-5 bg-card rounded-lg shadow-sm max-w-lg w-full">
         <div className="flex flex-col items-center gap-2">
           <h1 className="font-semibold text-xl text-card-foreground">

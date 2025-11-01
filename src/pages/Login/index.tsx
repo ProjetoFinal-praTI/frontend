@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Login = () => {
   return (
-    <div className="bg-background flex justify-center items-center h-screen">
+    <div className="bg-background flex justify-center items-center min-h-[85vh]">
       <div className="flex flex-col items-center p-6 gap-5 bg-card rounded-lg shadow-sm max-w-md w-full">
         <div className="flex flex-col items-center gap-2">
           <h3 className="font-semibold text-xl text-card-foreground">

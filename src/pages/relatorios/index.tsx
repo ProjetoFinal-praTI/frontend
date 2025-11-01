@@ -1,7 +1,6 @@
 import { Button } from "@/shared/ui/buttons/button";
 import "../../shared/config/chart-configs";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
-import { Menu } from "@/shared/ui/menu";
 import { Card } from "@/shared/ui/card";
 
 export const Relatorios = () => {
@@ -76,8 +75,7 @@ export const Relatorios = () => {
 
   return (
     <>
-      <Menu />
-      <div className="flex flex-col gap-8 px-8 py-10 md:py-14 lg:px-20 md:px-20">
+      <div className="flex flex-col gap-8">
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
             <h1 className="md:text-3xl text-2xl font-semibold text-foreground">
