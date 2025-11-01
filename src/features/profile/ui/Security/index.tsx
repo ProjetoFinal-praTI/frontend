@@ -1,7 +1,7 @@
-import { Button } from "@/components/Buttons/Button";
-import { Card } from "@/components/Card";
-import { ShieldIcon } from "@/components/Icons/ShieldIcon";
-import { TelephoneIcon } from "@/components/Icons/TelephoneIcon";
+import { Button } from "@/shared/ui/buttons/button";
+import { Card } from "@/shared/ui/card";
+import { ShieldIcon } from "@/shared/ui/icons/shield-icon";
+import { TelephoneIcon } from "@/shared/ui/icons/telephone-icon";
 
 export const Security = () => {
   return (

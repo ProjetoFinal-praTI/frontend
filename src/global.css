@@ -47,3 +47,26 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
+
+.custom-progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background-color: var(--color-muted);
+}
+
+.custom-progress::-webkit-progress-bar {
+  background-color: var(--color-muted);
+}
+
+.custom-progress::-webkit-progress-value {
+  background-color: var(--color-primary);
+  border-radius: 8px;
+  transition: width 0.8s ease-in-out;
+}
+
+.custom-progress::-moz-progress-bar {
+  background-color: var(--color-primary);
+  border-radius: 8px;
+  transition: width 0.8s ease-in-out;
+}

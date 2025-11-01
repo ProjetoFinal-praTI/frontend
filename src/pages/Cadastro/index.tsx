@@ -1,5 +1,5 @@
-import { Button } from "@/components/Buttons/Button";
-import { CadastroForm } from "@/components/Forms/CadastroForm";
+import { RegisterForm } from "@/features/auth/register/ui/register-form";
+import { Button } from "@/shared/ui/buttons/button";
 import { Link } from "react-router-dom";
 
 export const Cadastro = () => {
@@ -14,7 +14,7 @@ export const Cadastro = () => {
             Comece a gerenciar suas finanças de forma inteligente
           </p>
         </div>
-        <CadastroForm />
+        <RegisterForm />
         <Button label="Entrar" className="w-full" />
         <p className="text-foreground text-sm text-center">
           Já tem uma conta?{" "}

@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/Forms/LoginForm";
+import { LoginForm } from "@/features/auth/login/ui/login-form";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
