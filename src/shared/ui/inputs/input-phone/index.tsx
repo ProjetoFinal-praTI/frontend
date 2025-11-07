@@ -36,7 +36,7 @@ export const InputPhone = (props: InputPhoneProps) => {
             }}
             placeholder={placeholder}
             maxLength={15}
-            className="bg-[#1f232e] w-full flex border border-border rounded-xl focus:outline-none text-card-foreground h-10 px-3 py-2 text-sm"
+            className="bg-[#1f232e] w-full flex border border-border/10 rounded-xl focus:outline-none text-card-foreground h-10 px-3 py-2 text-sm"
           />
         )}
       />

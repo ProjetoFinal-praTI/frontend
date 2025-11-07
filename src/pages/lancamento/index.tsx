@@ -166,7 +166,7 @@ export const Lancamento = () => {
                 className="p-4 rounded-lg bg-surface/50 border border-border/30"
               >
                 <div className="flex items-center gap-4">
-                  {transacoes.icon}
+                  <div className="bg-foreground/20 rounded-full p-2 ">{transacoes.icon}</div>
                   <div className="flex flex-col gap-2">
                     <h4 className="font-medium text-foreground">
                       {transacoes.name}
@@ -186,7 +186,7 @@ export const Lancamento = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-6  ">
                     <p className="font-semibold text-lg text-foreground">
                       {transacoes.price}
                     </p>

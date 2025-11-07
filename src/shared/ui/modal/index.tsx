@@ -65,7 +65,7 @@ export const Modal = (props: ModalProps) => {
       >
         <div
           ref={modalRef}
-          className="z-20 flex w-full max-w-2xl flex-col rounded-lg bg-background p-6 shadow-xl"
+          className="z-20 flex w-full max-w-2xl flex-col rounded-lg bg-background border border-border/80 p-6 shadow-xl"
           tabIndex={-1}
         >
           <button

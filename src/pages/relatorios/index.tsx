@@ -79,10 +79,10 @@ export const Relatorios = () => {
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
             <h1 className="md:text-3xl text-2xl font-semibold text-foreground">
-              Dashboard
+              Relatórios
             </h1>
             <p className="text-muted-foreground">
-              Visão geral das suas finanças
+              Análise detalhada das suas finanças
             </p>
           </div>
           <Button label="Exportar" />
@@ -125,7 +125,7 @@ export const Relatorios = () => {
           </Card>
         </div>
 
-        <div className="flex flex-wrap lg:flex-nowrap gap-6">
+        <div className="flex flex-wrap xl:flex-nowrap gap-6">
           <Card className="flex flex-col gap-3">
             <h2 className="text-white text-xl font-semibold">
               Evolução Mensal
@@ -171,23 +171,25 @@ export const Relatorios = () => {
           </Card>
         </div>
 
-        <Card className="flex flex-col gap-3 items-center">
-          <h2 className="text-white text-xl font-semibold">
+        <Card className="flex flex-col gap-3 w-xl">
+          <h2 className="text-white text-xl font-semibold text-center">
             Evolução do Saldo
           </h2>
-          <Line
-            data={lineData}
-            options={{
-              responsive: true,
-              plugins: { legend: { labels: { color: "white" } } },
-              scales: {
-                x: { ticks: { color: "white" } },
-                y: { ticks: { color: "white" } },
-              },
-            }}
-            width={280}
-            height={200}
-          />
+          <div className="flex items-center justify-center lg:h-64 h-48">
+            <Line
+              data={lineData}
+              options={{
+                responsive: true,
+                plugins: { legend: { labels: { color: "white" } } },
+                scales: {
+                  x: { ticks: { color: "white" } },
+                  y: { ticks: { color: "white" } },
+                },
+              }}
+              width={280}
+              height={200}
+            />
+          </div>
         </Card>
       </div>
     </>

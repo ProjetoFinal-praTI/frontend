@@ -11,7 +11,10 @@ export const Layout = ({ children }: LayoutProps) => {
 
   // Não mostrar o menu nas telas de login e cadastro (inclui rotas filhas)
   const hideMenu =
-    pathname.startsWith("/login") || pathname.startsWith("/cadastro");
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/cadastro") ||
+    pathname.startsWith("/esqueci-senha") ||
+    pathname.startsWith("/validar-token");
 
   return (
     <div className="min-h-screen bg-background">

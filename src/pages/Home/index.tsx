@@ -129,14 +129,14 @@ export const Home = () => {
               placeholder="Ex: Salário, Aluguel, Supermercado"
               inputType="text"
               value=""
-              variant="secondary"
+              variant="primary"
             />
             <CustomInput
               label="Valor (R$)"
               placeholder="0,00"
               inputType="number"
               value=""
-              variant="secondary"
+              variant="primary"
             />
             <Select
               label="Categoria"
@@ -156,7 +156,7 @@ export const Home = () => {
               label="Data"
               inputType="date"
               value=""
-              variant="secondary"
+              variant="primary"
             />
             <Button label="Adicionar" onClick={() => {}} />
           </div>

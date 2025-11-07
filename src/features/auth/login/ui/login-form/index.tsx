@@ -1,6 +1,7 @@
 import { Button } from "@/shared/ui/buttons/button";
 import { CustomInput } from "@/shared/ui/inputs/input-text";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const LoginForm = () => {
   const [value, setValue] = useState("");
@@ -21,12 +22,12 @@ export const LoginForm = () => {
         inputType="password"
         placeholder="********"
       />
-      <a
-        href=""
+      <Link
+        to="/esqueci-senha"
         className="text-sm text-primary hover:text-primary/80 self-end"
       >
         Esqueceu sua senha?
-      </a>
+      </Link>
       <Button label="Entrar" className="w-full" />
     </form>
   );

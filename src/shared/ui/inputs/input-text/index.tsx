@@ -16,7 +16,7 @@ export const CustomInput: React.FC<CustomInputProps> = ({
   onChange,
 }) => {
   const baseStyles =
-    "bg-[#1f232e] w-full flex border border-border rounded-xl focus:outline-none text-card-foreground";
+    "bg-[#1f232e] w-full flex border border-border/10 rounded-xl focus:outline-none text-card-foreground";
 
   const sizeStyles = {
     sm: inputType === "textarea" ? "p-2 text-sm" : "h-10 px-2 py-1 text-sm",
@@ -62,6 +62,7 @@ export const CustomInput: React.FC<CustomInputProps> = ({
               className="text-red-500"
               data-testid="CustomInput-component-label-required"
             >
+              {" "}
               *
             </span>
           )}

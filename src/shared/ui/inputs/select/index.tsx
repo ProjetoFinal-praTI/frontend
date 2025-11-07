@@ -18,7 +18,7 @@ export const Select = (props: SelectProps) => {
       </label>
       <select
         id={id}
-        className="bg-input w-full flex border border-border/10 px-3 py-2 rounded-xl focus:outline-none text-card-foreground"
+        className="bg-[#1f232e] w-full flex border border-border/10 px-3 py-2 rounded-xl focus:outline-none text-card-foreground"
         {...register}
       >
         {options.map((option, index) => (
