@@ -27,7 +27,6 @@ interface Meta {
 }
 
 export const Metas = () => {
-  // Função para carregar metas do localStorage
   const carregarMetasDoLocalStorage = (): Meta[] => {
     try {
       const metasSalvas = localStorage.getItem("metasAtivas");
@@ -38,7 +37,6 @@ export const Metas = () => {
       console.error("Erro ao carregar metas do localStorage:", error);
     }
 
-    // Retornar dados de exemplo se não houver nada salvo
     return [
       {
         id: 1,
@@ -73,35 +71,29 @@ export const Metas = () => {
     ];
   };
 
-  // Estado do modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingMetaId, setEditingMetaId] = useState<number | null>(null);
 
-  // Estado do modal de exclusão
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deletingMetaId, setDeletingMetaId] = useState<number | null>(null);
 
-  // Estado do modal de contribuição
   const [isContributionModalOpen, setIsContributionModalOpen] = useState(false);
   const [contributingMetaId, setContributingMetaId] = useState<number | null>(
     null
   );
   const [valorContribuicao, setValorContribuicao] = useState("");
 
-  // Estados do formulário
   const [nomeMeta, setNomeMeta] = useState("");
   const [descricao, setDescricao] = useState("");
   const [valorAlvo, setValorAlvo] = useState("");
   const [valorAtual, setValorAtual] = useState("");
   const [dataAlvo, setDataAlvo] = useState("");
 
-  // Estado das metas ativas - inicializa do localStorage
   const [metasAtivas, setMetasAtivas] = useState<Meta[]>(
     carregarMetasDoLocalStorage
   );
 
-  // useEffect para salvar metas no localStorage sempre que mudarem
   useEffect(() => {
     try {
       localStorage.setItem("metasAtivas", JSON.stringify(metasAtivas));
@@ -145,32 +137,27 @@ export const Metas = () => {
   };
 
   const handleEditMeta = (id: number) => {
-    // Encontrar a meta a ser editada
     const metaParaEditar = metasAtivas.find((meta) => meta.id === id);
 
     if (!metaParaEditar) return;
 
-    // Preencher o formulário com os dados da meta
     setNomeMeta(metaParaEditar.title);
     setDescricao(metaParaEditar.description);
     setValorAlvo(metaParaEditar.targetAmount.toString());
     setValorAtual(metaParaEditar.currentAmount.toString());
 
-    // Converter a data formatada de volta para o formato YYYY-MM-DD
     const dataPartes = metaParaEditar.deadline.split("/");
     if (dataPartes.length === 3) {
       const dataFormatadaInput = `${dataPartes[2]}-${dataPartes[1]}-${dataPartes[0]}`;
       setDataAlvo(dataFormatadaInput);
     }
 
-    // Ativar modo de edição
     setIsEditMode(true);
     setEditingMetaId(id);
     setIsModalOpen(true);
   };
 
   const handleDeleteMeta = (id: number) => {
-    // Abrir modal de confirmação
     setDeletingMetaId(id);
     setIsDeleteModalOpen(true);
   };
@@ -178,22 +165,18 @@ export const Metas = () => {
   const handleConfirmDelete = () => {
     if (deletingMetaId === null) return;
 
-    // Remover a meta do array
     setMetasAtivas(metasAtivas.filter((meta) => meta.id !== deletingMetaId));
 
-    // Fechar modal e limpar estado
     setIsDeleteModalOpen(false);
     setDeletingMetaId(null);
   };
 
   const handleCancelDelete = () => {
-    // Fechar modal sem excluir
     setIsDeleteModalOpen(false);
     setDeletingMetaId(null);
   };
 
   const handleAddContribution = (id: number) => {
-    // Abrir modal de contribuição
     setContributingMetaId(id);
     setValorContribuicao("");
     setIsContributionModalOpen(true);
@@ -208,7 +191,6 @@ export const Metas = () => {
       return;
     }
 
-    // Atualizar a meta adicionando a contribuição
     setMetasAtivas(
       metasAtivas.map((meta) => {
         if (meta.id === contributingMetaId) {
@@ -228,21 +210,18 @@ export const Metas = () => {
       })
     );
 
-    // Fechar modal e limpar estado
     setIsContributionModalOpen(false);
     setContributingMetaId(null);
     setValorContribuicao("");
   };
 
   const handleCancelContribution = () => {
-    // Fechar modal sem adicionar
     setIsContributionModalOpen(false);
     setContributingMetaId(null);
     setValorContribuicao("");
   };
 
   const handleNewMeta = () => {
-    // Limpar formulário e abrir em modo criação
     setNomeMeta("");
     setDescricao("");
     setValorAlvo("");
@@ -254,7 +233,6 @@ export const Metas = () => {
   };
 
   const handleUpdateMeta = () => {
-    // Validar campos
     if (!nomeMeta || !valorAlvo || !dataAlvo) {
       alert("Por favor, preencha os campos obrigatórios");
       return;
@@ -265,14 +243,11 @@ export const Metas = () => {
     const valorAlvoNum = parseFloat(valorAlvo);
     const valorAtualNum = parseFloat(valorAtual) || 0;
 
-    // Calcular progresso atualizado
     const progressoAtualizado =
       valorAlvoNum > 0 ? Math.round((valorAtualNum / valorAlvoNum) * 100) : 0;
 
-    // Formatar data para exibição
     const dataFormatada = new Date(dataAlvo).toLocaleDateString("pt-BR");
 
-    // Atualizar a meta no array
     setMetasAtivas(
       metasAtivas.map((meta) =>
         meta.id === editingMetaId
@@ -289,7 +264,6 @@ export const Metas = () => {
       )
     );
 
-    // Limpar formulário e fechar modal
     setNomeMeta("");
     setDescricao("");
     setValorAlvo("");
@@ -298,12 +272,9 @@ export const Metas = () => {
     setIsEditMode(false);
     setEditingMetaId(null);
     setIsModalOpen(false);
-
-    // Aqui você adicionaria a lógica para atualizar na API
   };
 
   const handleCreateMeta = () => {
-    // Validar campos
     if (!nomeMeta || !valorAlvo || !dataAlvo) {
       alert("Por favor, preencha os campos obrigatórios");
       return;
@@ -312,14 +283,11 @@ export const Metas = () => {
     const valorAlvoNum = parseFloat(valorAlvo);
     const valorAtualNum = parseFloat(valorAtual) || 0;
 
-    // Calcular progresso inicial
     const progressoInicial =
       valorAlvoNum > 0 ? Math.round((valorAtualNum / valorAlvoNum) * 100) : 0;
 
-    // Formatar data para exibição
     const dataFormatada = new Date(dataAlvo).toLocaleDateString("pt-BR");
 
-    // Criar nova meta
     const novaMeta: Meta = {
       id: Date.now(),
       title: nomeMeta,
@@ -328,21 +296,17 @@ export const Metas = () => {
       targetAmount: valorAlvoNum,
       deadline: dataFormatada,
       progress: progressoInicial,
-      monthlyContribution: 0, // Calcular depois baseado no prazo
+      monthlyContribution: 0,
     };
 
-    // Adicionar a nova meta à lista de metas ativas
     setMetasAtivas([...metasAtivas, novaMeta]);
 
-    // Limpar formulário e fechar modal
     setNomeMeta("");
     setDescricao("");
     setValorAlvo("");
     setValorAtual("");
     setDataAlvo("");
     setIsModalOpen(false);
-
-    // Aqui você adicionaria a lógica para salvar na API
   };
 
   const handleSaveMeta = () => {
@@ -354,7 +318,6 @@ export const Metas = () => {
   };
 
   const handleCancelModal = () => {
-    // Limpar formulário e fechar modal
     setNomeMeta("");
     setDescricao("");
     setValorAlvo("");
@@ -367,7 +330,6 @@ export const Metas = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      {/* Header */}
       <div className="flex flex-col md:flex-row gap-3 justify-between md:items-center">
         <div className="flex flex-col gap-2">
           <h1 className="md:text-3xl text-2xl font-semibold text-foreground">
@@ -380,7 +342,6 @@ export const Metas = () => {
         <Button label="Nova Meta" onClick={handleNewMeta} />
       </div>
 
-      {/* Cards de Resumo */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
@@ -435,7 +396,6 @@ export const Metas = () => {
         </Card>
       </div>
 
-      {/* Metas Ativas */}
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-primary"></div>
@@ -447,7 +407,6 @@ export const Metas = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {metasAtivas.map((meta) => (
             <Card key={meta.id} className="flex flex-col gap-4">
-              {/* Header do Card */}
               <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-1">
                   <h3 className="text-lg font-semibold text-foreground">
@@ -475,7 +434,6 @@ export const Metas = () => {
                 </div>
               </div>
 
-              {/* Barra de Progresso */}
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Progresso</span>
@@ -486,7 +444,6 @@ export const Metas = () => {
                 <ProgressBar value={meta.progress} className="h-2" />
               </div>
 
-              {/* Valores */}
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
                   <span className="text-sm text-muted-foreground">Atual</span>
@@ -502,17 +459,11 @@ export const Metas = () => {
                 </div>
               </div>
 
-              {/* Footer */}
               <div className="flex items-center justify-between pt-4 border-t border-border/40">
                 <div className="flex gap-2 text-sm text-foreground">
                   <CalendarIcon className="w-4 h-4" />
                   <span>{meta.deadline}</span>
                 </div>
-                {/* <Button 
-                onClick={() => handleAddContribution(meta.id)}
-                variant="outline"
-                label="Adicionar Contribuição"
-                /> */}
                 <button
                   onClick={() => handleAddContribution(meta.id)}
                   className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 hover:bg-primary/20 rounded-md transition-colors text-sm font-medium text-foreground cursor-pointer"
@@ -522,7 +473,6 @@ export const Metas = () => {
                 </button>
               </div>
 
-              {/* Meta Mensal */}
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Meta mensal</span>
                 <span className="font-semibold text-foreground">
@@ -534,7 +484,6 @@ export const Metas = () => {
         </div>
       </div>
 
-      {/* Metas Concluídas */}
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <CheckIcon className="w-5 h-5 text-green-500" />
@@ -546,7 +495,6 @@ export const Metas = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {metasConcluidas.map((meta) => (
             <Card key={meta.id} className="flex flex-col gap-4">
-              {/* Header do Card */}
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-3">
                   <div className="p-2 rounded-full bg-green-500/10 mt-1">
@@ -576,7 +524,6 @@ export const Metas = () => {
                 </div>
               </div>
 
-              {/* Valor Final */}
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Valor alcançado</span>
                 <span className="font-semibold text-green-500">
@@ -587,8 +534,6 @@ export const Metas = () => {
           ))}
         </div>
       </div>
-
-      {/* Modal de Nova Meta / Editar Meta */}
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
         <div className="flex flex-col gap-6">
           <h2 className="text-2xl font-bold text-foreground">
@@ -596,7 +541,6 @@ export const Metas = () => {
           </h2>
 
           <div className="flex flex-col gap-4">
-            {/* Nome da Meta */}
             <CustomInput
               label="Nome da Meta"
               placeholder="Ex: Comprar um carro"
@@ -604,8 +548,6 @@ export const Metas = () => {
               onChange={setNomeMeta}
               required
             />
-
-            {/* Descrição */}
             <CustomInput
               label="Descrição (opcional)"
               placeholder="Descreva sua meta..."
@@ -613,8 +555,6 @@ export const Metas = () => {
               onChange={setDescricao}
               inputType="textarea"
             />
-
-            {/* Valor Alvo e Valor Atual */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <CustomInput
                 label="Valor Alvo (R$)"
@@ -624,7 +564,6 @@ export const Metas = () => {
                 inputType="number"
                 required
               />
-
               <CustomInput
                 label="Valor Atual (R$)"
                 placeholder="0"
@@ -633,8 +572,6 @@ export const Metas = () => {
                 inputType="number"
               />
             </div>
-
-            {/* Data Alvo */}
             <CustomInput
               label="Data Alvo"
               value={dataAlvo}
@@ -643,8 +580,6 @@ export const Metas = () => {
               required
             />
           </div>
-
-          {/* Botões */}
           <div className="flex items-center justify-end gap-3 pt-4">
             <button
               onClick={handleCancelModal}
@@ -661,8 +596,6 @@ export const Metas = () => {
           </div>
         </div>
       </Modal>
-
-      {/* Modal de Confirmação de Exclusão */}
       <Modal
         isModalOpen={isDeleteModalOpen}
         setIsModalOpen={setIsDeleteModalOpen}
@@ -674,8 +607,6 @@ export const Metas = () => {
             Tem certeza que deseja excluir esta meta? Esta ação não pode ser
             desfeita.
           </p>
-
-          {/* Botões */}
           <div className="flex items-center justify-end gap-3 pt-4">
             <button
               onClick={handleCancelDelete}
@@ -692,8 +623,6 @@ export const Metas = () => {
           </div>
         </div>
       </Modal>
-
-      {/* Modal de Adicionar Contribuição */}
       <Modal
         isModalOpen={isContributionModalOpen}
         setIsModalOpen={setIsContributionModalOpen}
@@ -710,8 +639,6 @@ export const Metas = () => {
               <h2 className="text-2xl font-bold text-foreground">
                 Adicionar Fundos
               </h2>
-
-              {/* Informações da Meta */}
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col gap-1">
                   <span className="text-sm text-muted-foreground">Meta:</span>
@@ -727,8 +654,6 @@ export const Metas = () => {
                   </span>
                 </div>
               </div>
-
-              {/* Input de Valor */}
               <div className="flex flex-col gap-2">
                 <CustomInput
                   label="Valor a Adicionar (R$)"
@@ -739,8 +664,6 @@ export const Metas = () => {
                   required
                 />
               </div>
-
-              {/* Novo Saldo */}
               {valorContribuicaoNum > 0 && (
                 <div className="flex items-center gap-2 text-sm">
                   <span className="text-muted-foreground">Novo saldo:</span>
@@ -749,8 +672,6 @@ export const Metas = () => {
                   </span>
                 </div>
               )}
-
-              {/* Botões */}
               <div className="flex items-center justify-end gap-3 pt-4">
                 <button
                   onClick={handleCancelContribution}

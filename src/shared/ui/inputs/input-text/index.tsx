@@ -32,7 +32,6 @@ export const CustomInput: React.FC<CustomInputProps> = ({
   const getCombinedClasses = (baseClasses: string) => {
     let classes = `${sizeStyles[size]} ${baseClasses} ${variants[variant]}`;
 
-    // Só aplica estilos de desabilitado se realmente estiver disabled ou readonly
     if (disabled) {
       classes += " bg-gray-100 text-gray-500 cursor-not-allowed";
     }
