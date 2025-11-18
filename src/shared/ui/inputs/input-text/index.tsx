@@ -14,6 +14,8 @@ export const CustomInput: React.FC<CustomInputProps> = ({
   variant = "primary",
   inputType = "text",
   onChange,
+  error,
+  register,
 }) => {
   const baseStyles =
     "bg-[#1f232e] w-full flex border border-border/10 rounded-xl focus:outline-none text-card-foreground";
@@ -48,6 +50,12 @@ export const CustomInput: React.FC<CustomInputProps> = ({
 
   const isTextarea = inputType === "textarea";
 
+  const inputProps = register
+    ? register
+    : onChange
+    ? { value, onChange: handleChange }
+    : { defaultValue: value };
+
   return (
     <div className="flex flex-col gap-2">
       {label && (
@@ -70,11 +78,10 @@ export const CustomInput: React.FC<CustomInputProps> = ({
 
       {isTextarea ? (
         <textarea
-          value={value}
+          {...inputProps}
           placeholder={placeholder}
           disabled={disabled}
           readOnly={readonly}
-          onChange={handleChange}
           className={getCombinedClasses(`${baseStyles} resize-none`)}
           style={{
             ...style,
@@ -85,18 +92,18 @@ export const CustomInput: React.FC<CustomInputProps> = ({
       ) : (
         <input
           type={inputType}
-          value={value}
+          {...inputProps}
           placeholder={placeholder}
           required={required}
           disabled={disabled}
           max={maxDate}
           readOnly={readonly}
-          onChange={handleChange}
           className={getCombinedClasses(baseStyles)}
           data-testid="CustomInput-component-inputfield"
           style={style}
         />
       )}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 };

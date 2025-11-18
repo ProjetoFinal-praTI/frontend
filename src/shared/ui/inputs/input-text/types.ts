@@ -18,4 +18,5 @@ export interface CustomInputProps {
 
   inputType?: "text" | "password" | "textarea" | "email" | "date" | "number";
   onChange?: (value: string) => void;
+  error?: string;
 }

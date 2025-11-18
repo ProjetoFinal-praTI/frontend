@@ -2,12 +2,24 @@ import { Preferences } from "@/features/profile/ui/preferences";
 import { ProfileForm } from "@/features/profile/ui/profile-form";
 import { Security } from "@/features/profile/ui/security";
 import { Button } from "@/shared/ui/buttons/button";
+import { useState } from "react";
 
 export const MeuPerfil = () => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditToggle = () => {
+    if (isEditing) {
+      // Aqui você pode adicionar lógica para salvar os dados
+      console.log("Salvando dados...");
+      // Depois de salvar, volta para modo readonly
+    }
+    setIsEditing(!isEditing);
+  };
+
   return (
     <>
       <div className="flex flex-col gap-8">
-        <div className="flex items-center justify-between">
+        <div className="flex md:items-center md:justify-between flex-col md:flex-row gap-4">
           <div className="flex flex-col gap-2">
             <h1 className="md:text-2xl text-xl text-foreground font-semibold">
               Meu Perfil
@@ -16,9 +28,12 @@ export const MeuPerfil = () => {
               Gerencie suas informações pessoais e configurações
             </p>
           </div>
-          <Button label="Editar Perfil" className="sm:block hidden" />
+          <Button
+            label={isEditing ? "Salvar" : "Editar Perfil"}
+            onClick={handleEditToggle}
+          />
         </div>
-        <ProfileForm />
+        <ProfileForm isEditing={isEditing} />
         <div className="flex gap-8 flex-col lg:flex-row">
           <Preferences />
           <Security />

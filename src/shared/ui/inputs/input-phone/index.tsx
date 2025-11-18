@@ -8,10 +8,11 @@ interface InputPhoneProps {
   placeholder: string;
   control: any;
   error?: string;
+  readonly?: boolean;
 }
 
 export const InputPhone = (props: InputPhoneProps) => {
-  const { label, onChange, id, placeholder, control, error } = props;
+  const { label, onChange, id, placeholder, control, error, readonly } = props;
 
   return (
     <div className="flex flex-col gap-2">
@@ -36,6 +37,7 @@ export const InputPhone = (props: InputPhoneProps) => {
             }}
             placeholder={placeholder}
             maxLength={15}
+            readOnly={readonly}
             className="bg-[#1f232e] w-full flex border border-border/10 rounded-xl focus:outline-none text-card-foreground h-10 px-3 py-2 text-sm"
           />
         )}

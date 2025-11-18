@@ -5,7 +5,11 @@ import { InputPhone } from "@/shared/ui/inputs/input-phone";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export const ProfileForm = () => {
+interface ProfileFormProps {
+  isEditing: boolean;
+}
+
+export const ProfileForm = ({ isEditing }: ProfileFormProps) => {
   const [email, setEmail] = useState("");
   const [nome, setNome] = useState("");
   const [location, setLocation] = useState("");
@@ -32,6 +36,7 @@ export const ProfileForm = () => {
             label="Nome Completo"
             inputType="text"
             placeholder="Seu nome completo"
+            readonly={!isEditing}
           />
           <CustomInput
             value={email}
@@ -39,6 +44,7 @@ export const ProfileForm = () => {
             label="E-mail"
             inputType="email"
             placeholder="seu@email.com"
+            readonly={!isEditing}
           />
           <InputPhone
             label="Telefone"
@@ -46,6 +52,7 @@ export const ProfileForm = () => {
             placeholder="(11) 99999-8888"
             control={control}
             error={errors.phone?.message as string}
+            readonly={!isEditing}
           />
           <CustomInput
             value={location}
@@ -53,6 +60,7 @@ export const ProfileForm = () => {
             label="Localização"
             inputType="text"
             placeholder="São Paulo, SP"
+            readonly={!isEditing}
           />
           <CustomInput
             value={birth}
@@ -60,6 +68,7 @@ export const ProfileForm = () => {
             label="Data de Nascimento"
             inputType="date"
             maxDate={new Date().toISOString().split("T")[0]}
+            readonly={!isEditing}
           />
         </div>
       </div>

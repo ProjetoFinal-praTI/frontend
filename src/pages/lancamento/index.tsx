@@ -153,49 +153,74 @@ export const Lancamento = () => {
               onChange={(e) => setSearchPatients(e.target.value)}
               placeholder="Pesquisar transações..."
             />
-            {/* <SearchIcon className="w-5 h-5 absolute top-3 bottom-0 right-3 stroke-foreground" /> */}
-            <Select label="" options={options} id="select-category" />
           </div>
         </Card>
         <Card className="w-full relative flex flex-col gap-4">
           <h3 className="text-xl font-semibold text-foreground">Transações</h3>
           <div className="flex flex-col gap-4">
-            {transacoes.map((transacoes, index) => (
-              <div
-                key={index}
-                className="p-4 rounded-lg bg-surface/50 border border-border/30"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="bg-foreground/20 rounded-full p-2 ">{transacoes.icon}</div>
-                  <div className="flex flex-col gap-2">
-                    <h4 className="font-medium text-foreground">
-                      {transacoes.name}
-                    </h4>
-                    <div className="flex gap-2">
-                      <div className="flex items-center gap-1 rounded-full px-2.5 py-0.5 w-fit border border-border/40">
-                        <CheckIcon className="w-4 h-4 text-foreground" />
-                        <p className="font-semibold text-foreground">
-                          {transacoes.category}
-                        </p>
+            {transacoes
+              .filter((transacao) => {
+                const searchTerm = searchPatients.toLowerCase();
+                return (
+                  transacao.name.toLowerCase().includes(searchTerm) ||
+                  transacao.category.toLowerCase().includes(searchTerm) ||
+                  transacao.price.toLowerCase().includes(searchTerm) ||
+                  transacao.date.includes(searchTerm)
+                );
+              })
+              .map((transacoes, index) => (
+                <div
+                  key={index}
+                  className="p-4 rounded-lg bg-surface/50 border border-border/30"
+                >
+                  <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+                    <div className="bg-foreground/20 rounded-full p-2 ">
+                      {transacoes.icon}
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <h4 className="font-medium text-foreground">
+                        {transacoes.name}
+                      </h4>
+                      <div className="flex gap-2 flex-col md:flex-row">
+                        <div className="flex items-center gap-1 rounded-full px-2.5 py-0.5 w-fit border border-border/40">
+                          <CheckIcon className="w-4 h-4 text-foreground" />
+                          <p className="font-semibold text-foreground">
+                            {transacoes.category}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1 rounded-full px-2.5 py-0.5 w-fit border border-border/40">
+                          <CalendarIcon className="w-4 h-4 text-foreground" />
+                          <p className="font-semibold text-foreground">
+                            {transacoes.date}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-1 rounded-full px-2.5 py-0.5 w-fit border border-border/40">
-                        <CalendarIcon className="w-4 h-4 text-foreground" />
-                        <p className="font-semibold text-foreground">
-                          {transacoes.date}
-                        </p>
+                    </div>
+                    <div className="flex items-center gap-6 md:ml-auto">
+                      <p className="font-semibold text-lg text-foreground">
+                        {transacoes.price}
+                      </p>
+                      <div className="flex items-center gap-6">
+                        {transacoes.iconPencil}
+                        {transacoes.iconTrash}
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-6  ">
-                    <p className="font-semibold text-lg text-foreground">
-                      {transacoes.price}
-                    </p>
-                    {transacoes.iconPencil}
-                    {transacoes.iconTrash}
-                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            {transacoes.filter((transacao) => {
+              const searchTerm = searchPatients.toLowerCase();
+              return (
+                transacao.name.toLowerCase().includes(searchTerm) ||
+                transacao.category.toLowerCase().includes(searchTerm) ||
+                transacao.price.toLowerCase().includes(searchTerm) ||
+                transacao.date.includes(searchTerm)
+              );
+            }).length === 0 && (
+              <p className="text-center text-muted-foreground py-8">
+                Nenhuma transação encontrada
+              </p>
+            )}
           </div>
         </Card>
       </div>

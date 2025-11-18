@@ -1,5 +1,4 @@
 import { RegisterForm } from "@/features/auth/register/ui/register-form";
-import { Button } from "@/shared/ui/buttons/button";
 import { Link } from "react-router-dom";
 
 export const Cadastro = () => {
@@ -15,7 +14,6 @@ export const Cadastro = () => {
           </p>
         </div>
         <RegisterForm />
-        <Button label="Entrar" className="w-full" />
         <p className="text-foreground text-sm text-center">
           Já tem uma conta?{" "}
           <Link to={"/login"} className="font-bold underline cursor-pointer">
