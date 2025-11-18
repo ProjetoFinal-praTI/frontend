@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Login } from "./pages/login";
-import { Cadastro } from "./pages/cadastro";
-import { Home } from "./pages/home";
+import { Login } from "./pages/Login";
+import { Cadastro } from "./pages/Cadastro";
+import { Home } from "./pages/Home";
 import { MeuPerfil } from "./pages/meu-perfil";
 import { Lancamento } from "./pages/lancamento";
 import { EsqueciSenha } from "./pages/esqueci-senha";
