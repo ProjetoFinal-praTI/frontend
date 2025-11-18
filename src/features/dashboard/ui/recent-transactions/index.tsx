@@ -1,8 +1,21 @@
 import { Button } from "@/shared/ui/buttons/button";
 import { Card } from "@/shared/ui/card";
 
-export const RecentTransactions = () => {
-  const transactions = [
+interface Transaction {
+  where: string;
+  typeExpense: string;
+  date: string;
+  price: string;
+}
+
+interface RecentTransactionsProps {
+  transactions?: Transaction[];
+}
+
+export const RecentTransactions = ({
+  transactions: propTransactions,
+}: RecentTransactionsProps) => {
+  const defaultTransactions = [
     {
       where: "Supermercado São João",
       typeExpense: "Alimentação",
@@ -34,6 +47,8 @@ export const RecentTransactions = () => {
       price: "+R$ 800,00",
     },
   ];
+
+  const transactions = propTransactions || defaultTransactions;
 
   const getPriceColor = (price: string) => {
     if (price.startsWith("+")) return "text-success";

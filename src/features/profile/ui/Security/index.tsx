@@ -21,7 +21,7 @@ export const Security = () => {
           <TelephoneIcon stroke="white" className="w-4 h-4" />
           Configurar autenticação 2FA
         </button>
-        <div className="shrink-0 bg-border h-[1px] w-full" />
+        <div className="shrink-0 bg-border h-px w-full" />
         <div className="flex gap-3 xl:items-center xl:flex-row flex-col xl:justify-between">
           <div className="flex flex-col gap-1">
             <h4 className="font-medium md:text-base text-sm text-foreground">

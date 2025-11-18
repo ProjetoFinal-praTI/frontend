@@ -7,15 +7,122 @@ import "@/shared/config/chart-configs";
 import { RecentTransactions } from "@/features/dashboard/ui/recent-transactions";
 import { FinancialSummary } from "@/features/dashboard/ui/financial-summary";
 import { EconomyGoals } from "@/features/dashboard/ui/economy-goals";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "@/shared/ui/modal";
 import { Select } from "@/shared/ui/inputs/select";
 import { CustomInput } from "@/shared/ui/inputs/input-text";
 import { Button } from "@/shared/ui/buttons/button";
-// import { EconomyGoals } from "@/features/Dashboard/ui/EconomyGoals";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+// Schema de validação com Zod
+const lancamentoSchema = z.object({
+  type: z.enum(["receita", "despesa"], {
+    message: "Selecione um tipo",
+  }),
+  description: z.string().min(3, "Descrição deve ter no mínimo 3 caracteres"),
+  value: z.string().min(1, "Valor é obrigatório"),
+  category: z.string().min(1, "Selecione uma categoria"),
+  date: z.string().min(1, "Data é obrigatória"),
+});
+
+type LancamentoFormData = z.infer<typeof lancamentoSchema>;
+
+// Função para carregar transações do localStorage
+const carregarTransacoesDoLocalStorage = () => {
+  const transacoesSalvas = localStorage.getItem("transactions");
+  if (transacoesSalvas) {
+    return JSON.parse(transacoesSalvas);
+  }
+  return [
+    {
+      where: "Supermercado São João",
+      typeExpense: "Alimentação",
+      date: "14/01/2024",
+      price: "R$ 89,50",
+    },
+    {
+      where: "Salário",
+      typeExpense: "Receita",
+      date: "14/01/2024",
+      price: "+R$ 3.500,00",
+    },
+    {
+      where: "Uber",
+      typeExpense: "Transporte",
+      date: "13/01/2024",
+      price: "R$ 18,90",
+    },
+    {
+      where: "Netflix",
+      typeExpense: "Lazer",
+      date: "12/01/2024",
+      price: "R$ 29,90",
+    },
+    {
+      where: "Freelance Design",
+      typeExpense: "Receita",
+      date: "11/01/2024",
+      price: "+R$ 800,00",
+    },
+  ];
+};
 
 export const Home = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [transactions, setTransactions] = useState(
+    carregarTransacoesDoLocalStorage()
+  );
+
+  // Salva as transações no localStorage sempre que mudam
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<LancamentoFormData>({
+    resolver: zodResolver(lancamentoSchema),
+  });
+
+  const onSubmit = async (data: LancamentoFormData) => {
+    setIsLoading(true);
+
+    // Simula uma chamada de API
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    // Formata a data de yyyy-mm-dd para dd/mm/yyyy
+    const [year, month, day] = data.date.split("-");
+    const formattedDate = `${day}/${month}/${year}`;
+
+    // Formata o valor
+    const formattedValue =
+      data.type === "receita"
+        ? `+R$ ${parseFloat(data.value).toFixed(2)}`
+        : `R$ ${parseFloat(data.value).toFixed(2)}`;
+
+    // Cria a nova transação
+    const newTransaction = {
+      where: data.description,
+      typeExpense:
+        data.category.charAt(0).toUpperCase() + data.category.slice(1),
+      date: formattedDate,
+      price: formattedValue,
+    };
+
+    // Adiciona no início da lista
+    setTransactions([newTransaction, ...transactions]);
+
+    // Reseta o formulário e fecha o modal
+    reset();
+    setIsLoading(false);
+    setOpenModal(false);
+  };
 
   const cards = [
     {
@@ -86,7 +193,7 @@ export const Home = () => {
           ))}
         </div>
         <div className="flex md:flex-row flex-col gap-8">
-          <RecentTransactions />
+          <RecentTransactions transactions={transactions} />
           <EconomyGoals />
         </div>
         <FinancialSummary />
@@ -112,7 +219,10 @@ export const Home = () => {
           isModalOpen={openModal}
           setIsModalOpen={() => setOpenModal(false)}
         >
-          <div className="flex flex-col gap-6">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-6"
+          >
             <h2 className="text-xl font-semibold text-foreground">
               Novo Lançamento
             </h2>
@@ -123,6 +233,9 @@ export const Home = () => {
                 { value: "receita", label: "Receita" },
                 { value: "despesa", label: "Despesa" },
               ]}
+              register={register("type")}
+              error={errors.type?.message}
+              required
             />
             <CustomInput
               label="Descrição"
@@ -130,6 +243,8 @@ export const Home = () => {
               inputType="text"
               value=""
               variant="primary"
+              register={register("description")}
+              error={errors.description?.message}
             />
             <CustomInput
               label="Valor (R$)"
@@ -137,6 +252,8 @@ export const Home = () => {
               inputType="number"
               value=""
               variant="primary"
+              register={register("value")}
+              error={errors.value?.message}
             />
             <Select
               label="Categoria"
@@ -151,15 +268,25 @@ export const Home = () => {
                 { value: "investimentos", label: "Investimentos" },
                 { value: "outros", label: "Outros" },
               ]}
+              register={register("category")}
+              error={errors.category?.message}
+              required
             />
             <CustomInput
               label="Data"
               inputType="date"
               value=""
               variant="primary"
+              register={register("date")}
+              error={errors.date?.message}
             />
-            <Button label="Adicionar" onClick={() => {}} />
-          </div>
+            <Button
+              label="Adicionar"
+              type="submit"
+              isLoading={isLoading}
+              disabled={isLoading}
+            />
+          </form>
         </Modal>
       )}
     </>
