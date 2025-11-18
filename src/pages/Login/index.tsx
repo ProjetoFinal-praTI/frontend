@@ -1,4 +1,7 @@
 import { LoginForm } from "@/features/auth/login/ui/login-form";
+import { Button } from "@/shared/ui/buttons/button";
+import { GoogleIcon } from "@/shared/ui/icons/google-icon";
+import { LinkedinIcon } from "@/shared/ui/icons/linkedin-icon";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
@@ -20,6 +23,24 @@ export const Login = () => {
             Cadastre-se
           </Link>
         </p>
+        <div className="flex flex-col gap-5">
+          <Button
+            icon={<GoogleIcon className="w-5 h-5" />}
+            label="Continuar com Google"
+            onClick={() => console.log("Cliquei no botão")}
+            variant="outline"
+            fontWeight="medium"
+            fontSize="sm"
+          />
+          <Button
+            icon={<LinkedinIcon className="w-5 h-5" />}
+            label="Continuar com LinkedIn"
+            onClick={() => console.log("Cliquei no botão")}
+            variant="outline"
+            fontWeight="medium"
+            fontSize="sm"
+          />
+        </div>
       </div>
     </div>
   );

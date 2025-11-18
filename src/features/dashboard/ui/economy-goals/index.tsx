@@ -30,7 +30,9 @@ export const EconomyGoals = () => {
         <h1 className="md:text-lg text-base font-semibold text-foreground">
           Metas de Economia
         </h1>
-        <Button label="Gerenciar" />
+        <a href="/metas">
+          <Button label="Gerenciar" />
+        </a>
       </div>
       <div className="flex flex-col gap-6">
         {goals.map((goal, index) => (
